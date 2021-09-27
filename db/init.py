@@ -58,4 +58,5 @@ def create():
     session.commit()
 
 
-create()
+if __name__ == '__main__':
+    create()
