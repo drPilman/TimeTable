@@ -1,0 +1,60 @@
+
+.container-fluid {
+    padding: 0 4em;
+    .row {
+        .col {
+            padding: 1em;
+            border-bottom: 0.125em solid rgb(209, 209, 209);
+            border-right: 0.125em solid rgb(209, 209, 209);
+
+            .inner-box {
+                width: 100%;
+                height: 100px;
+                padding: 0.5em 1em;
+                display: flex;
+                flex-direction: row;
+
+                p {
+                    align-self: center;
+                }
+            }
+
+            p {
+                color: #000;
+                font-size: 1.25em;
+                font-weight: 300;
+                text-align: center;
+                width: 100%;
+                line-height: 1.3;
+            }
+
+            &:first-child {
+                p {
+                    font-size: 1.5em;
+                }
+            }
+            
+            &:last-child {
+                border-right: 0;
+            }
+ 
+        }
+
+        &:last-child {
+            .col {
+                border-bottom: 0;
+            }
+        }
+    }
+    
+    #table_header {
+        background-color: rgb(153, 0, 140);
+
+        .col {
+            p {
+                font-size: 2em;
+                color: #fff;
+            }
+        }
+    }
+}
