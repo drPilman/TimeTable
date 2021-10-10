@@ -2,8 +2,9 @@ from sqlalchemy import *
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship, Session
+from sqlalchemy.ext.associationproxy import association_proxy
 import json
-from connection import DB_URL
+from db.connection import DB_URL
 
 Base = declarative_base()
 engine = create_engine(DB_URL, json_serializer=lambda obj: json.dumps(obj, ensure_ascii=False))
@@ -19,6 +20,9 @@ class Time(Base):
     end_minute = Column(Integer, nullable=False, default=0)
     lessons = relationship('Lesson', cascade='all,delete', back_populates='time')
 
+    def __repr__(self):
+        return f'{self.id}  {self.start_hour}'
+
 
 class Day(Base):
     __tablename__ = 'days'
@@ -26,7 +30,7 @@ class Day(Base):
     number_in_all = Column(Integer, nullable=False)
     number_in_week = Column(Integer, nullable=False)
     number_of_week = Column(Integer, nullable=False)
-    #name = Column(String, nullable=False)
+    # name = Column(String, nullable=False)
     lessons = relationship('Lesson', cascade='all,delete', back_populates='day')
 
 
@@ -36,6 +40,9 @@ class Group(Base):
     name = Column(String, nullable=False)
     comment = Column(String)
     lessons = relationship('Lesson', cascade='all,delete', back_populates='group')
+
+    def __repr__(self):
+        return f"{self.id}: {self.name}"
 
 
 class Type(Base):
@@ -49,6 +56,7 @@ class Subject(Base):
     __tablename__ = 'subjects'
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
+    short = Column(String, nullable=False)
     lessons = relationship('Lesson', cascade='all,delete', back_populates='subject')
 
 
@@ -69,6 +77,7 @@ class Room(Base):
     location = relationship('Location', back_populates='rooms')
     lessons = relationship('Lesson', cascade='all,delete', back_populates='room')
 
+
 class Teacher(Base):
     __tablename__ = 'teachers'
     id = Column(Integer, primary_key=True)
@@ -81,6 +90,9 @@ class Teacher(Base):
     comment = Column(String)
     lessons = relationship('Lesson', cascade='all,delete', back_populates='teacher')
 
+    def name(self):
+        return f'{self.second_name} {self.first_name[0] + "." if self.first_name else ""}'
+
 
 class Lesson(Base):
     __tablename__ = 'lessons'
@@ -91,37 +103,49 @@ class Lesson(Base):
     time = relationship('Time', back_populates='lessons')
     day_id = Column(Integer, ForeignKey('days.id'), nullable=False)
     day = relationship('Day', back_populates='lessons')
+
     subject_id = Column(Integer, ForeignKey('subjects.id'), nullable=False)
     subject = relationship('Subject', back_populates='lessons')
-    type_id = Column(Integer, ForeignKey('types.id'), nullable=False)
+    type_id = Column(Integer, ForeignKey('types.id'))
     type = relationship('Type', back_populates='lessons')
-    teacher_id = Column(Integer, ForeignKey('teachers.id'), nullable=False)
+    teacher_id = Column(Integer, ForeignKey('teachers.id'))
     teacher = relationship('Teacher', back_populates='lessons')
-    room_id = Column(Integer, ForeignKey('rooms.id'), nullable=False)
+    room_id = Column(Integer, ForeignKey('rooms.id'))
     room = relationship('Room', back_populates='lessons')
     comment = Column(String)
 
-
-"""
-class Group(Base):
-    __tablename__ = 'groups'
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    updatedAt = Column(DateTime, nullable=True, default=None)  # datetime.datetime.utcnow
-    data = Column(JSON)  # nullable=True, default=None)
-    isProcessed = Column(Boolean, nullable=False, default=False)
-    timetables = relationship('Timetable')
+    def __repr__(self):
+        return f'{self.subject.name} {self.group.name} {self.time_id}'
 
 
-class User(Base):
-    __tablename__ = 'users'
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    timetables = relationship('Timetable')
+def getWeekById(group_id, week_num):
+    res = [[('') * 3 for les in range(5)] for day in range(5)]
+    for lesson in session.query(Lesson.time_id,
+                                Subject.short,
+                                Day.number_in_week,
+                                Room.name.label('room'),
+                                Teacher.second_name,
+                                Teacher.first_name,
+                                Type.name) \
+            .join(Lesson.day) \
+            .join(Lesson.teacher) \
+            .join(Lesson.room) \
+            .join(Lesson.subject) \
+            .join(Lesson.type) \
+            .filter(Day.number_of_week == week_num) \
+            .filter(Lesson.group_id == group_id).all():
+        res[lesson.number_in_week][lesson.time_id - 1] = \
+            lesson.short,\
+            lesson.name,\
+            lesson.room, \
+            Teacher.name(lesson)
+    return res
 
 
-class Timetable(Base):
-    __tablename__ = 'timetables'
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('users.id'))
-    group_id = Column(Integer, ForeignKey('groups.id'))"""
+def getTime():
+    return [f'{s.start_hour}:{s.start_minute} - {s.end_hour}:{s.end_minute}' for s in
+            session.query(Time).order_by(Time.id).all()]
+
+
+def getGroupList():
+    return session.query(Group).all()

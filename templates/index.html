@@ -6,8 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Automatically generated schedule</title>
-    <link rel="stylesheet" href="static/bootstrap.css">
-    <link rel="stylesheet" href="static/index.css">
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/index.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -61,231 +61,28 @@
                 </p>
             </div>
         </div>
-        
+        {% for day in data %}
         <div class="row schedule_row">
             <div class="col">
                 <div class="inner-box">
                     <p>
-                        9:30 - 11:05
+                        {{time[loop.index0]}}
                     </p>
                 </div>
             </div>
+            {% for les in day %}
             <div class="col">
                 <div class="inner-box">
                     <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
+                        <nobr>{{les[0]}} {{les[1]}}</nobr>
+                        <nobr>{{les[2]}}</nobr>
+                        <nobr>{{les[3]}}</nobr>
                     </p>
                 </div>
             </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
-
-        <div class="row schedule_row">
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        9:30 - 11:05
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row schedule_row">
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        9:30 - 11:05
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row schedule_row">
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        9:30 - 11:05
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row schedule_row">
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        9:30 - 11:05
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="inner-box">
-                    <p>
-                        <nobr>Какое-то говно</nobr> <nobr>ауд. 1488</nobr> <nobr>Глинский П.</nobr>
-                    </p>
-                </div>
-            </div>
-        </div>
+         {% endfor %}
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
